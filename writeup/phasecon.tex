@@ -79,16 +79,25 @@ CCD camera.
 \section{Transmission of light through a polarized gas} 
 
 The electric field of the light that traverses the atomic cloud can be written
-in general form (see Sec.~6.1 of~\cite{auzinsh2010optically}) as \begin{equation}
+in general form (see Sec.~6.1 of~\cite{auzinsh2010optically}) as 
+\begin{equation}
  \efield( \bv{r}, t ) = 
-     \text{Re}\lbrace \efieldo e^{i(\bv{k}\cdot\bv{r} - \omega t + \phi )} 
+     \text{Re}\lbrace \efieldo e^{i(\bv{k}\cdot\bv{r} - \omega t + \varphi )} 
+     [ \cos\alpha \bv{\hat{e}}_{1} 
+   +   \sin\alpha e^{i\phi} \bv{\hat{e}}_{2} ] \rbrace 
+  %\label{eq:efield-param}
+\end{equation}
+
+\begin{equation}
+ \efield( \bv{r}, t ) = 
+     \text{Re}\lbrace \efieldo e^{i(\bv{k}\cdot\bv{r} - \omega t + \varphi )} 
      [ ( \cos\alpha \cos \epsilon - i \sin\alpha\sin\epsilon) \bv{\hat{e}}_{1} 
    + (\sin\alpha \cos\epsilon + i \cos\alpha\sin\epsilon) \bv{\hat{e}}_{2} ] \rbrace 
   \label{eq:efield-param}
 \end{equation}
 where $\bv{\hat{e}}_{1,2}$ are two orthogonal unit vectors perpendicular to the
 wave vector $\bv{k}$ and perpendicular to each other,  $\efieldo$ is the
-electric field amplitude, $\phi$ is an overall phase,  $\alpha$ is the angle
+electric field amplitude, $\varphi$ is an overall phase,  $\alpha$ is the angle
 between the major axis of the polarization ellipse and the $\bv{\hat{e}}_{1}$
 axis, and $\epsilon$ is the arctangent of the ratio of the minor to the major
 axis of the polarization ellipse. 
@@ -111,7 +120,7 @@ Just as the electric field was parameterized in Eq.~\ref{eq:efield-param}, the
 same can be done with the polarization in terms of the four real parameters
 $P_{i}$ as 
 \begin{equation}
- \dpol = \text{Re} \lbrace e^{i(\bv{k}\cdot\bv{r} - \omega t + \phi) }
+ \dpol = \text{Re} \lbrace e^{i(\bv{k}\cdot\bv{r} - \omega t + \varphi) }
    [(P_{1} - i P_{2}) \bv{\hat{e}}_{1} + ( P_{3} - i P_{4}) \bv{\hat{e}}_{2} ] \rbrace
   \label{eq:pol-param}
 \end{equation}
@@ -129,6 +138,17 @@ derivatives of the electric field parameters.  This justifiable as long as the
 fractional change of the parameters is small over one wavelength of the light,
 which is certainly the case for our dilute atom cloud.  The resulting
 expressions for the change of the field parameters per unit distance are:
+\begin{align}
+ \frac{1}{\efieldo} \frac{d \efieldo }{ d \ell} =  
+     \frac{2\pi \omega}{\efieldo c} ( P_{2} \cos\alpha + P_{4} \sin\alpha ) \\ 
+ \frac{ d \varphi }{d \ell} = 
+     \frac{2\pi\omega}{\efieldo c} \left( \frac{ P_{1} }{\cos\alpha} \right) \\
+ \frac{ d \alpha}{ d \ell} = 
+     \frac{2\pi\omega}{\efieldo c} ( -P_{2} \sin\alpha + P_{4} \cos\alpha ) \\
+ \frac{ d \phi}{ d \ell} = 
+     - \frac{2\pi\omega}{\efieldo c }
+     \left(  \frac{ -P_{1}\sin\alpha + P_{3}\cos\alpha }{ \sin\alpha\cos\alpha } \right)
+\end{align}
 %\begin{align} 
 % \frac{1}{\efieldo} \frac{d \efieldo }{ d \ell} =  
 %     \frac{2\pi \omega}{\efieldo c} [ \sin\alpha( -P_{1} \sin\epsilon 
@@ -392,6 +412,12 @@ $\bv{\hat{e}}_{1}$ and $\bv{\hat{e}}_{2}$.}
 \begin{equation}
    (P_{1} - i P_{2}) \bv{\hat{e}}_{1} + ( P_{3} - i P_{4}) \bv{\hat{e}}_{2} 
  =  \epsilon_{0} \efieldo \ts{\chi} 
+     [  \cos\alpha  \bv{\hat{e}}_{1} 
+   + \sin\alpha e^{i\phi}  \bv{\hat{e}}_{2} ] 
+\end{equation}
+\begin{equation}
+   (P_{1} - i P_{2}) \bv{\hat{e}}_{1} + ( P_{3} - i P_{4}) \bv{\hat{e}}_{2} 
+ =  \epsilon_{0} \efieldo \ts{\chi} 
      [ ( \cos\alpha \cos \epsilon - i \sin\alpha\sin\epsilon) \bv{\hat{e}}_{1} 
    + (\sin\alpha \cos\epsilon + i \cos\alpha\sin\epsilon) \bv{\hat{e}}_{2} ] 
 \end{equation}
@@ -401,6 +427,17 @@ $\bv{\hat{e}}_{1} = \left[ \begin{smallmatrix}  1 \\ 0 \end{smallmatrix} \right]
 and 
 $\bv{\hat{e}}_{2} = \left[ \begin{smallmatrix}  0 \\ 1 \end{smallmatrix} \right]$
 this can be written in matrix form as 
+\begin{equation}
+ \left[ \begin{matrix}  P_{1}-iP_{2} \\ P_{3}-iP_{4} \end{matrix} \right]
+  =  \epsilon_{0}\efieldo 
+ \left[ \begin{matrix}
+     \chi_{11} & \chi_{12} \\ \chi_{21} & \chi_{22} 
+ \end{matrix} \right]
+ \left[ \begin{matrix}
+      \cos\alpha \\
+      \sin\alpha e^{i\phi}
+ \end{matrix} \right]
+\end{equation}
 \begin{equation}
  \left[ \begin{matrix}  P_{1}-iP_{2} \\ P_{3}-iP_{4} \end{matrix} \right]
   =  \epsilon_{0}\efieldo 
@@ -554,6 +591,15 @@ give
 Returning to the polarization parameters we have 
 \begin{equation}
 \begin{split}
+  P_{1} - i P_{2} & = \epsilon_{0} \efieldo \chi_{xx} \cos\alpha \\
+  P_{3} - i P_{4} & = \epsilon_{0} \efieldo \chi_{zz} \sin\alpha e^{i\phi} \\
+      & =   \epsilon_{0}\efieldo \sin\alpha \left[
+            (\text{Re}\chi_{zz} \cos\phi - \text{Im}\chi_{zz}\sin\phi ) 
+          +i(\text{Re}\chi_{zz} \sin\phi + \text{Im}\chi_{zz}\cos\phi ) \right]
+\end{split}
+\end{equation}
+\begin{equation}
+\begin{split}
   P_{1} - i P_{2} & = \epsilon_{0} \efieldo \chi_{xx}
       [\cos\alpha \cos \epsilon - i \sin\alpha\sin\epsilon] \\
   P_{3} - i P_{4} & = \epsilon_{0} \efieldo \chi_{zz} 
@@ -561,6 +607,16 @@ Returning to the polarization parameters we have
 \end{split}
 \end{equation}
 which becomes
+\begin{equation}
+\begin{split}
+  P_{1} &= \epsilon_{0} \efieldo \text{Re}\chi_{xx} \cos\alpha \\
+  P_{2} &= -\epsilon_{0} \efieldo \text{Im}\chi_{xx} \cos\alpha \\ 
+  P_{3} &= \epsilon_{0} \efieldo \sin\alpha 
+            (\text{Re}\chi_{zz} \cos\phi - \text{Im}\chi_{zz}\sin\phi ) \\ 
+  P_{4} &= -\epsilon_{0} \efieldo \sin\alpha
+          (\text{Re}\chi_{zz} \sin\phi + \text{Im}\chi_{zz}\cos\phi ) \\ 
+\end{split}
+\end{equation}
 \begin{equation}
 \begin{split}
   P_{1} &= \epsilon_{0} \efieldo[
@@ -583,6 +639,16 @@ detuning is chosen so that the imaginary part  can be neglected, which results
 in
 \begin{equation}
 \begin{split}
+  P_{1} &= \epsilon_{0} \efieldo \text{Re}\chi_{xx} \cos\alpha \\
+  P_{2} &= 0\\ 
+  P_{3} &= \epsilon_{0} \efieldo \sin\alpha 
+            \text{Re}\chi_{zz} \cos\phi \\ 
+  P_{4} &= -\epsilon_{0} \efieldo \sin\alpha
+           \text{Re}\chi_{zz} \sin\phi  \\ 
+\end{split}
+\end{equation}
+\begin{equation}
+\begin{split}
   P_{1} &= \epsilon_{0} \efieldo
             ( \cos\alpha\cos\epsilon ) \text{Re}\chi_{xx} \\
   P_{2} &= \epsilon_{0} \efieldo
@@ -593,9 +659,24 @@ in
            ( \cos\alpha\sin\epsilon ) \text{Re}\chi_{zz} \\ 
 \end{split}
 \end{equation}
+    
 
 The differential equations for the electric field parameters, which were
 obtained in Eq.~\ref{eq:diff-param}, become 
+\begin{equation}
+\begin{split}
+ \frac{1}{\efieldo} \frac{d \efieldo }{ d \ell} & = \   
+     -\frac{2\pi \omega\epsilon_{0}}{ c} \sin^{2}\!\alpha \sin\phi \text{Re}\chi_{zz}  \\ 
+ \frac{ d \varphi }{d \ell} & = \  
+     \frac{2\pi\omega\epsilon_{0}}{ c} \text{Re}\chi_{xx}  \\
+ \frac{ d \alpha}{ d \ell} & = \   
+     -\frac{2\pi\omega\epsilon_{0}}{c} \sin\alpha \cos\alpha \sin\phi \text{Re}\chi_{zz}  \\
+ \frac{ d \phi}{ d \ell} & = \ 
+      \frac{2\pi\omega\epsilon_{0}}{c }
+     \left(  \text{Re}\chi_{xx} 
+       - \cos\phi \text{Re}\chi_{zz}\right)
+\end{split}
+\end{equation}
 \begin{align} 
  \frac{1}{\efieldo} \frac{d \efieldo }{ d \ell} = 0 \\  
  \frac{ d \varphi }{d \ell} = 
